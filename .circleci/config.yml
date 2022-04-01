@@ -21,10 +21,34 @@ jobs:
       - run:
           name: Say hello in << parameters.cluster >>
           command: echo 'Hello, World! << parameters.cluster >>'
+  not_set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          command: |
+            ls -a
+            bash not_set_eo_pipefail.sh
+  set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          command: |
+            ls -a
+            bash set_eo_pipefail.sh
+
+
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello:
           cluster: non-prod
+  set_euxo_pipefail:
+    jobs:
+      - set_euxo_pipefail
+  not_set_euxo_pipefail:
+    jobs:
+      - not_set_euxo_pipefail
 
 
