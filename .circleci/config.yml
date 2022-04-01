@@ -1,0 +1,30 @@
+version: 2.1
+
+parameters:
+  cluster:
+    description: cluster environment
+    type: enum
+    default: sandbox
+    enum: [ "sandbox", "non-prod", "prod" ]
+jobs:
+  say-hello:
+    docker:
+      - image: cimg/base:stable
+    parameters:
+      cluster:
+        description: cluster environment
+        type: enum
+        default: sandbox
+        enum: [ "sandbox", "non-prod", "prod" ]
+    steps:
+      - checkout
+      - run:
+          name: Say hello in << parameters.cluster >>
+          command: echo 'Hello, World! << parameters.cluster >>'
+workflows:
+  say-hello-workflow:
+    jobs:
+      - say-hello:
+          cluster: non-prod
+
+
