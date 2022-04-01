@@ -25,6 +25,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - checkout
       - run:
           command: |
             ls -a
@@ -33,6 +34,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - checkout
       - run:
           command: |
             ls -a
