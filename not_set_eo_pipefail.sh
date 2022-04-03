@@ -3,3 +3,4 @@
 
 foo | echo a
 echo bar
+touch "$(date)".txt
