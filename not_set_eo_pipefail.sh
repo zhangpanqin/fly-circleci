@@ -3,4 +3,4 @@
 
 foo | echo a
 echo bar
-touch "$(date)".txt
+echo > ceshi111.txt
