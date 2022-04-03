@@ -1,6 +1,6 @@
 #!/bin/bash
 #set -euxo pipefail
-$(pwd)
 foo | echo a
 echo bar
+cd ~
 echo > ceshi111.txt
