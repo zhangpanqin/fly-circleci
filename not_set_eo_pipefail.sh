@@ -3,4 +3,4 @@ cd ~
 #set -euxo pipefail
 foo | echo a
 echo bar
-echo '111' > ceshi111.txt
+touch aaa.txt
