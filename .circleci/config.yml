@@ -21,8 +21,7 @@ jobs:
       - run:
           name: Say hello in << parameters.cluster >>
           command: |
-            cat $BASH_ENV
-            echo $BASH_ENV
+            cat ~/.bashrc
             echo 'Hello, World! << parameters.cluster >>'
   not_set_euxo_pipefail:
     docker:
