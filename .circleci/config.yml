@@ -20,7 +20,10 @@ jobs:
       - checkout
       - run:
           name: Say hello in << parameters.cluster >>
-          command: echo 'Hello, World! << parameters.cluster >>'
+          command: |
+            cat $BASH_ENV
+            echo $BASH_ENV
+            echo 'Hello, World! << parameters.cluster >>'
   not_set_euxo_pipefail:
     docker:
       - image: cimg/base:stable
