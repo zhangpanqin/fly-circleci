@@ -1,4 +1,5 @@
 #!/bin/bash
+pwd
 #set -euxo pipefail
 foo | echo a
 echo bar
