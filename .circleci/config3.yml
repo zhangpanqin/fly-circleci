@@ -1,0 +1,60 @@
+version: 2.1
+
+parameters:
+  cluster:
+    description: cluster environment
+    type: enum
+    default: sandbox
+    enum: [ "sandbox", "non-prod", "prod" ]
+jobs:
+  say-hello:
+    docker:
+      - image: cimg/base:stable
+    parameters:
+      cluster:
+        description: cluster environment
+        type: enum
+        default: sandbox
+        enum: [ "sandbox", "non-prod", "prod" ]
+    steps:
+      - checkout
+      - run:
+          name: Say hello in << parameters.cluster >>
+          command: echo 'Hello, World! << parameters.cluster >>'
+      - run:
+          name: ceshi pipeline
+          command: |
+            echo <<  >>
+  not_set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          command: |
+            ls -a
+            bash not_set_eo_pipefail.sh
+  set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          command: |
+            ls -a
+            bash set_eo_pipefail.sh
+
+
+workflows:
+  say-hello-workflow:
+    jobs:
+      - say-hello:
+          cluster: non-prod
+  set_euxo_pipefail:
+    jobs:
+      - set_euxo_pipefail
+  not_set_euxo_pipefail:
+    jobs:
+      - not_set_euxo_pipefail
+
+
