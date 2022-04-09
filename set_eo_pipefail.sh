@@ -2,4 +2,4 @@
 set -euxo pipefail
 
 foo | echo a
-echo bar
+echo 11

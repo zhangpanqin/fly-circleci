@@ -1,6 +1,5 @@
-#!/bin/bash
-cd ~
+#!/usr/bin/env bash
 #set -euxo pipefail
+
 foo | echo a
-echo bar
-touch aaa.txt
+echo 11
