@@ -1,11 +1,23 @@
 version: 2.1
 orbs:
   fly-tools: zhangpanqin/fly-tools@dev:d016c953127373c4cd0b45881c1acefb62e75741
+  node: circleci/node@5.0.2
 parameters:
   version:
     type: string
     default: bb
 jobs:
+  test-node:
+    executor: node/default
+    steps:
+      - run:
+         command: node -v
+  test-node2:
+      docker:
+        - image: cimg/node:lts
+      steps:
+        - run:
+            command: node -v
   say-hello:
     docker:
       - image: cimg/base:stable
