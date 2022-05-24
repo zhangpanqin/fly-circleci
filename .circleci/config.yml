@@ -23,7 +23,7 @@ jobs:
           name: ceshi pipeline parameters
           command: |
             echo '<< pipeline.parameters.version >>'
-      - greet:
+      - fly-tools/greet:
           to: panqin
 
 workflows:
