@@ -1,5 +1,6 @@
 version: 2.1
-
+orbs:
+  fly-tools: zhangpanqin/fly-tools@0.0.3
 parameters:
   version:
     type: string
@@ -23,7 +24,6 @@ jobs:
           command: |
             echo '<< pipeline.parameters.version >>'
 
-
 workflows:
   say-hello-workflow:
     jobs:
@@ -32,4 +32,5 @@ workflows:
     jobs:
       - say-hello:
           cluster: 传入参数
-
+      - greet:
+          to: panqin
