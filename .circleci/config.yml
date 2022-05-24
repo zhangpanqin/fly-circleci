@@ -39,6 +39,12 @@ jobs:
           to: panqin
 
 workflows:
+  test-node-workflow:
+    jobs:
+      - test-node
+  test-node-workflow2:
+    jobs:
+      - test-node2
   say-hello-workflow:
     jobs:
       - say-hello
