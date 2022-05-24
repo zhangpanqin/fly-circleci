@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  fly-tools: zhangpanqin/fly-tools@0.0.3
+  fly-tools: zhangpanqin/fly-tools@dev:d016c953127373c4cd0b45881c1acefb62e75741
 parameters:
   version:
     type: string
