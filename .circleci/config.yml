@@ -1,11 +1,10 @@
 version: 2.1
-orbs:
-  fly-tools: zhangpanqin/fly-tools@dev:d016c953127373c4cd0b45881c1acefb62e75741
-  node: circleci/node@5.0.2
 parameters:
-  version:
-    type: string
-    default: bb
+  cluster:
+    description: cluster environment
+    type: enum
+    default: sandbox
+    enum: [ "sandbox", "non-prod", "prod" ]
 jobs:
   test-node:
     executor: node/default
@@ -24,19 +23,41 @@ jobs:
     parameters:
       cluster:
         description: cluster environment
-        type: string
-        default: << pipeline.parameters.version >>
+        type: enum
+        default: sandbox
+        enum: [ "sandbox", "non-prod", "prod" ]
     steps:
       - checkout
       - run:
           name: Say hello in << parameters.cluster >>
           command: echo 'Hello, World! << parameters.cluster >>'
+  not_set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
       - run:
-          name: ceshi pipeline parameters
           command: |
-            echo '<< pipeline.parameters.version >>'
-      - fly-tools/greet:
-          to: panqin
+            ls -a
+            bash not_set_eo_pipefail.sh
+  set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          command: |
+            ls -a
+            bash set_eo_pipefail.sh
+  export_pipe_test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          command: |
+            ls -a
+            bash pipefail.sh
 
 workflows:
   test-node-workflow:
@@ -47,8 +68,16 @@ workflows:
       - test-node2
   say-hello-workflow:
     jobs:
-      - say-hello
-  say-hello-workflow2:
-    jobs:
       - say-hello:
-          cluster: 传入参数
+          cluster: non-prod
+  set_euxo_pipefail:
+    jobs:
+      - set_euxo_pipefail
+  not_set_euxo_pipefail:
+    jobs:
+      - not_set_euxo_pipefail
+  export_pipe_workflow:
+    jobs:
+        - export_pipe_test
+
+
