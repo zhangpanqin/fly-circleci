@@ -1,0 +1,85 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+parameters:
+  cluster:
+    description: cluster environment
+    type: enum
+    default: sandbox
+    enum: [ "sandbox", "non-prod", "prod" ]
+jobs:
+  test-node:
+    executor: node/default
+    steps:
+      - run:
+         command: node -v
+  test-node2:
+      docker:
+        - image: cimg/node:lts
+      steps:
+        - run:
+            command: node -v
+  say-hello:
+    docker:
+      - image: cimg/base:stable
+    parameters:
+      cluster:
+        description: cluster environment
+        type: enum
+        default: sandbox
+        enum: [ "sandbox", "non-prod", "prod" ]
+    steps:
+      - checkout
+      - run:
+          name: Say hello in << parameters.cluster >>
+          command: echo 'Hello, World! << parameters.cluster >>'
+  not_set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          command: |
+            ls -a
+            bash not_set_eo_pipefail.sh
+  set_euxo_pipefail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          command: |
+            ls -a
+            bash set_eo_pipefail.sh
+  export_pipe_test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          command: |
+            ls -a
+            bash pipefail.sh
+
+workflows:
+  test-node-workflow:
+    jobs:
+      - test-node
+  test-node-workflow2:
+    jobs:
+      - test-node2
+  say-hello-workflow:
+    jobs:
+      - say-hello:
+          cluster: non-prod
+  set_euxo_pipefail:
+    jobs:
+      - set_euxo_pipefail
+  not_set_euxo_pipefail:
+    jobs:
+      - not_set_euxo_pipefail
+  export_pipe_workflow:
+    jobs:
+        - export_pipe_test
+
+
