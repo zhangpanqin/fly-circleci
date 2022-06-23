@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Export tag to environment
-          command: echo "export TAG=$(git rev-parse --short HEAD)" >> $BASH_ENV
+          command: echo "export TAG=$(git2 rev-parse --short HEAD)" >> $BASH_ENV
       - run:
           command: echo 'Hello, World!'
 workflows:
