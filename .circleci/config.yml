@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - checkout
+      - checkout1
       - run:
           command: echo 'Hello, World!'
 workflows:
