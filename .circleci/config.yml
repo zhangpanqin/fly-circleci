@@ -6,7 +6,7 @@ commands:
         env:
           type: enum
           enum: [ "nonprod" ,"prod" ]
-          default: nonprod
+          default: prod
     steps:
       - when:
           condition:
