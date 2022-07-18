@@ -1,5 +1,19 @@
 version: 2.1
 
+commands:
+  test-condition:
+    parameters:
+        env:
+          type: enum
+          enum: [ "nonprod" ,"prod" ]
+          default: nonprod
+    when:
+      condition:
+        equal: [<< parameters.env >>,"nonprod"]
+      steps:
+        - run:
+           command: echo condition in << parameters.env >>
+
 on-tag-change: &on-tag-change
   branches:
     only: /main/
@@ -13,6 +27,7 @@ jobs:
       - checkout
       - run:
           command: echo 'Hello, World!'
+      - test-condition
 workflows:
   say-hello-workflow:
     jobs:
