@@ -1,6 +1,11 @@
 version: 2.1
 
 commands:
+  test-env:
+    steps:
+      - run:
+          command: |
+            export AA=123
   test-condition:
     parameters:
         env:
@@ -29,6 +34,15 @@ jobs:
       - run:
           command: echo 'Hello, World!'
       - test-condition
+  say-hello2:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - test-env
+      - run:
+          command: |
+            echo $AA
 workflows:
   say-hello-workflow:
     jobs:
