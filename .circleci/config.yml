@@ -48,6 +48,4 @@ workflows:
     jobs:
       - say-hello:
           filters: *on-tag-change
-
-
-
+      - say-hello2
